@@ -21,7 +21,8 @@ Explore the current application and analyze its functionality.
 
 #### Global Context and useReducer
 
-Set up global context and immediately create a general setup for useReducer. Create two files, one for reducer and one for actions.
+Set up global context and immediately create a general setup for useReducer. 
+Create two files, one for reducer and one for actions.
 
 #### Cart State Value
 
