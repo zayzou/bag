@@ -6,12 +6,14 @@ const GlobalContext = createContext();
 //setup a provider
 
 //global setup for reducer
-const defaultState = {}
+const defaultState = {
+    cart: new Map()
+}
 export const AppContext = ({children}) => {
 
     const [state, dispatch] = useReducer(reducer, defaultState)
     return (
-        <GlobalContext.Provider value={{}}>
+        <GlobalContext.Provider value={{state, dispatch}}>
             {children}
         </GlobalContext.Provider>
     )
