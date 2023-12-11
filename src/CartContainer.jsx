@@ -1,48 +1,51 @@
 import CartItem from './CartItem';
 import cartItems from './data';
-const CartContainer = () => {
-  const cartArray = [...cartItems];
+import {useGlobalContext} from "./context.jsx";
 
-  if (cartArray.length === 0) {
+const CartContainer = () => {
+    const {state} = useGlobalContext();
+    console.log(state.cart)
+    const cartArray = [...state.cart];
+    if (cartArray.length === 0) {
+        return (
+            <section className='cart'>
+                {/* cart header */}
+                <header>
+                    <h2>your bag</h2>
+                    <h4 className='empty-cart'>is currently empty</h4>
+                </header>
+            </section>
+        );
+    }
     return (
-      <section className='cart'>
-        {/* cart header */}
-        <header>
-          <h2>your bag</h2>
-          <h4 className='empty-cart'>is currently empty</h4>
-        </header>
-      </section>
+        <section className='cart'>
+            {/* cart header */}
+            <header>
+                <h2>your bag</h2>
+            </header>
+            {/* cart items */}
+            <div>
+                {cartArray.map(([id, cartItem]) => {
+                    return <CartItem key={id} {...cartItem} />;
+                })}
+            </div>
+            {/* cart footer */}
+            <footer>
+                <hr/>
+                <div>
+                    <h5 className='cart-total'>
+                        total <span>$10</span>
+                    </h5>
+                </div>
+                <button
+                    className='btn btn-hipster'
+                    onClick={() => console.log('clear cart')}
+                >
+                    clear cart
+                </button>
+            </footer>
+        </section>
     );
-  }
-  return (
-    <section className='cart'>
-      {/* cart header */}
-      <header>
-        <h2>your bag</h2>
-      </header>
-      {/* cart items */}
-      <div>
-        {cartArray.map((cartItem) => {
-          return <CartItem key={cartItem.id} {...cartItem} />;
-        })}
-      </div>
-      {/* cart footer */}
-      <footer>
-        <hr />
-        <div>
-          <h5 className='cart-total'>
-            total <span>$10</span>
-          </h5>
-        </div>
-        <button
-          className='btn btn-hipster'
-          onClick={() => console.log('clear cart')}
-        >
-          clear cart
-        </button>
-      </footer>
-    </section>
-  );
 };
 
 export default CartContainer;
