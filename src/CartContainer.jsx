@@ -2,7 +2,7 @@ import CartItem from './CartItem';
 import {useGlobalContext} from "./context.jsx";
 
 const CartContainer = () => {
-    const {state, clear,totalAmount} = useGlobalContext();
+    const {state, clear,totalCost} = useGlobalContext();
     const cartArray = [...state.cart];
     if (cartArray.length === 0) {
         return (
@@ -32,7 +32,7 @@ const CartContainer = () => {
                 <hr/>
                 <div>
                     <h5 className='cart-total'>
-                        total <span>${totalAmount}</span>
+                        total <span>${totalCost.toFixed(2)}</span>
                     </h5>
                 </div>
                 <button

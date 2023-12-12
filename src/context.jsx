@@ -33,10 +33,14 @@ export const AppContext = ({ children }) => {
   };
 
   const totalAmount = state.cart.reduce((a, c) => a + c[1].amount, 0);
-  console.log(totalAmount);
+
+  const totalCost = state.cart.reduce(
+    (a, c) => a + c[1].amount * c[1].price,
+    0
+  );
   return (
     <GlobalContext.Provider
-      value={{ state, clear, removeItem, increase, decrease, totalAmount }}
+      value={{ state, clear, removeItem, increase, decrease, totalAmount,totalCost }}
     >
       {children}
     </GlobalContext.Provider>
