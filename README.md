@@ -79,7 +79,9 @@ const cart = [
 ];
 ```
 
-Using an array to store shopping cart data may not be the best option because it can be less efficient for lookups and updates, especially for larger datasets. Arrays are also less flexible than Maps when it comes to associating values with unique identifiers.
+Using an array to store shopping cart data may not be the best option because it can be less 
+efficient for lookups and updates, especially for larger datasets. Arrays are also less flexible than Maps
+when it comes to associating values with unique identifiers.
 
 - object
 
@@ -90,15 +92,23 @@ const cart = {
 };
 ```
 
-The downsides of using an object to store shopping cart data include the risk of unintended property overwriting or unexpected behavior when iterating over inherited properties. Additionally, objects can only use string keys, which can be limiting if you need to use non-string keys. Deleting properties from an object can also be tricky, especially when dealing with inherited properties.
+The downsides of using an object to store shopping cart data include the risk of unintended property 
+overwriting or unexpected behavior when iterating over inherited properties. Additionally,
+objects can only use string keys, which can be limiting if you need to use non-string keys. 
+Deleting properties from an object can also be tricky, especially when dealing with inherited
+properties.
 
 - new Map()
 
-For a shopping cart application, using a new Map() to store the cart data is beneficial because it allows for efficient lookups and updates based on unique product IDs. Using a Map can also ensure that each item in the cart has a unique identifier and can easily be updated or removed without affecting other items in the cart.
+For a shopping cart application, using a new Map() to store the cart data is beneficial because it 
+allows for efficient lookups and updates based on unique product IDs. Using a Map can also ensure that each
+item in the cart has a unique identifier and can easily be updated or removed without affecting other items 
+in the cart.
 
 #### Map
 
-A Map is a built-in data structure in JavaScript that allows you to store key-value pairs, where both the keys and values can be any data type. Here's a simple example:
+A Map is a built-in data structure in JavaScript that allows you to store key-value pairs, 
+where both the keys and values can be any data type. Here's a simple example:
 
 ```js
 // create a new Map instance

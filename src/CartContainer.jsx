@@ -1,10 +1,8 @@
 import CartItem from './CartItem';
-import cartItems from './data';
 import {useGlobalContext} from "./context.jsx";
 
 const CartContainer = () => {
-    const {state} = useGlobalContext();
-    console.log(state.cart)
+    const {state, clear} = useGlobalContext();
     const cartArray = [...state.cart];
     if (cartArray.length === 0) {
         return (
@@ -39,7 +37,7 @@ const CartContainer = () => {
                 </div>
                 <button
                     className='btn btn-hipster'
-                    onClick={() => console.log('clear cart')}
+                    onClick={clear}
                 >
                     clear cart
                 </button>
