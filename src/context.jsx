@@ -31,9 +31,12 @@ export const AppContext = ({ children }) => {
   const decrease = (id) => {
     dispatch({ type: DECREASE, payload: { id } });
   };
+
+  const totalAmount = state.cart.reduce((a, c) => a + c[1].amount, 0);
+  console.log(totalAmount);
   return (
     <GlobalContext.Provider
-      value={{ state, clear, removeItem, increase, decrease }}
+      value={{ state, clear, removeItem, increase, decrease, totalAmount }}
     >
       {children}
     </GlobalContext.Provider>
