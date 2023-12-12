@@ -1,8 +1,13 @@
 // components
-import Navbar from './Navbar';
-import CartContainer from './CartContainer';
+import Navbar from "./Navbar";
+import CartContainer from "./CartContainer";
+import { useGlobalContext } from "./context";
 
 function App() {
+  const { state } = useGlobalContext();
+  if (state.isLoading) {
+    return <div className="loading"></div>;
+  }
   return (
     <main>
       <Navbar />

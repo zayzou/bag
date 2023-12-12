@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from "react";
 import { reducer } from "./reducer.js";
 import cartItems from "./data.jsx";
 import { CLEAR_CART, DECREASE, INCREASE, REMOVE_ITEM } from "./actions.js";
+import { useEffect } from "react";
 //create a global context
 const GlobalContext = createContext();
 
@@ -11,6 +12,7 @@ const cart = new Map(items);
 //global setup for reducer
 const defaultState = {
   cart: cart,
+  isLoading: true,
 };
 
 export const AppContext = ({ children }) => {
@@ -41,6 +43,16 @@ export const AppContext = ({ children }) => {
     (a, c) => a + c[1].amount * c[1].price,
     0
   );
+
+  const setIsLoading = () => {
+    dispatch({ type: "SET_LOADING" });
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading();
+    }, 500);
+  }, []);
 
   return (
     <GlobalContext.Provider

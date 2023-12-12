@@ -1,6 +1,10 @@
 import { CLEAR_CART, DECREASE, INCREASE, REMOVE_ITEM } from "./actions.js";
 
 export const reducer = (state, action) => {
+  if (action.type === "SET_LOADING") {
+    return { ...state, isLoading: false };
+  }
+
   if (action.type === CLEAR_CART) {
     return { ...state, cart: new Map() };
   }
