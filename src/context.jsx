@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { reducer } from "./reducer.js";
 import cartItems from "./data.jsx";
-import { CLEAR_CART, REMOVE_ITEM } from "./actions.js";
+import { CLEAR_CART, DECREASE, INCREASE, REMOVE_ITEM } from "./actions.js";
 //create a global context
 const GlobalContext = createContext();
 
@@ -24,8 +24,17 @@ export const AppContext = ({ children }) => {
     dispatch({ type: REMOVE_ITEM, payload: { id } });
   };
 
+  const increase = (id) => {
+    dispatch({ type: INCREASE, payload: { id } });
+  };
+
+  const decrease = (id) => {
+    dispatch({ type: DECREASE, payload: { id } });
+  };
   return (
-    <GlobalContext.Provider value={{ state, clear, removeItem }}>
+    <GlobalContext.Provider
+      value={{ state, clear, removeItem, increase, decrease }}
+    >
       {children}
     </GlobalContext.Provider>
   );
