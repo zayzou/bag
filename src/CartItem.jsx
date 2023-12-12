@@ -9,7 +9,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
         <h5>{title}</h5>
         <span className='item-price'>${price}</span>
         {/* remove button */}
-        <button className='remove-btn' onClick={() => console.log('remove')}>
+        <button className='remove-btn' onClick={() => removeItem(id)}>
           remove
         </button>
       </div>
@@ -21,7 +21,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
         {/* amount */}
         <span className='amount'>{amount}</span>
         {/* decrease amount */}
-        <button className='amount-btn' onClick={() => removeItem(id)}>
+        <button className='amount-btn' onClick={() => console.log('decrease')}>
           <FaChevronDown className='amount-icon' />
         </button>
       </div>
