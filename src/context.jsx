@@ -6,8 +6,8 @@ import { CLEAR_CART, DECREASE, INCREASE, REMOVE_ITEM } from "./actions.js";
 const GlobalContext = createContext();
 
 //convert array to Map
-const cart = cartItems.map((item) => [item.id, item]);
-
+const items = cartItems.map((item) => [item.id, item]);
+const cart = new Map(items);
 //global setup for reducer
 const defaultState = {
   cart: cart,
@@ -32,15 +32,27 @@ export const AppContext = ({ children }) => {
     dispatch({ type: DECREASE, payload: { id } });
   };
 
-  const totalAmount = state.cart.reduce((a, c) => a + c[1].amount, 0);
+  const totalAmount = Array.from(state.cart).reduce(
+    (a, c) => a + c[1].amount,
+    0
+  );
 
-  const totalCost = state.cart.reduce(
+  const totalCost = Array.from(state.cart).reduce(
     (a, c) => a + c[1].amount * c[1].price,
     0
   );
+
   return (
     <GlobalContext.Provider
-      value={{ state, clear, removeItem, increase, decrease, totalAmount,totalCost }}
+      value={{
+        state,
+        clear,
+        removeItem,
+        increase,
+        decrease,
+        totalAmount,
+        totalCost,
+      }}
     >
       {children}
     </GlobalContext.Provider>

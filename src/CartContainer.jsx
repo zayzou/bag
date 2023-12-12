@@ -4,6 +4,7 @@ import {useGlobalContext} from "./context.jsx";
 const CartContainer = () => {
     const {state, clear,totalCost} = useGlobalContext();
     const cartArray = [...state.cart];
+
     if (cartArray.length === 0) {
         return (
             <section className='cart'>
