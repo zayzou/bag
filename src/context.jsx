@@ -1,22 +1,32 @@
 import { createContext, useContext, useReducer } from "react";
 import { reducer } from "./reducer.js";
 import cartItems from "./data.jsx";
-import { CLEAR_CART, DECREASE, INCREASE, REMOVE_ITEM } from "./actions.js";
+import {
+  CLEAR_CART,
+  DECREASE,
+  FETCH_DATA,
+  INCREASE,
+  REMOVE_ITEM,
+  SET_LOADING,
+} from "./actions.js";
+
 import { useEffect } from "react";
+
 //create a global context
 const GlobalContext = createContext();
 
-//convert array to Map
-const items = cartItems.map((item) => [item.id, item]);
-const cart = new Map(items);
 //global setup for reducer
 const defaultState = {
-  cart: cart,
-  isLoading: true,
+  cart: new Map(),
+  isLoading: false,
 };
 
 export const AppContext = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, defaultState);
+
+  let totalAmount = 0;
+
+  let totalCost = 0;
 
   const clear = () => {
     dispatch({ type: CLEAR_CART });
@@ -34,24 +44,22 @@ export const AppContext = ({ children }) => {
     dispatch({ type: DECREASE, payload: { id } });
   };
 
-  const totalAmount = Array.from(state.cart).reduce(
-    (a, c) => a + c[1].amount,
-    0
-  );
-
-  const totalCost = Array.from(state.cart).reduce(
-    (a, c) => a + c[1].amount * c[1].price,
-    0
-  );
-
-  const setIsLoading = () => {
-    dispatch({ type: "SET_LOADING" });
+  const fetchData = async () => {
+    dispatch({ type: SET_LOADING });
+    const response = await fetch(
+      "https://www.course-api.com/react-useReducer-cart-project"
+    );
+    const cart = await response.json();
+    dispatch({ type: FETCH_DATA, payload: { cart } });
   };
 
+  //move this to another file
+  for (const [key, { amount, price }] of state.cart) {
+    totalAmount += amount;
+    totalCost += amount * price;
+  }
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading();
-    }, 500);
+    fetchData();
   }, []);
 
   return (

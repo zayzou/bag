@@ -6,7 +6,7 @@ import { useGlobalContext } from "./context";
 function App() {
   const { state } = useGlobalContext();
   if (state.isLoading) {
-    return <div className="loading"></div>;
+    return <main className="loading"></main>;
   }
   return (
     <main>
